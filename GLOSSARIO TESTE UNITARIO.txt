@@ -1,0 +1,67 @@
+F.I.R.S.T
+
+Fast - Os testes unitarios devem executar rapidamente;
+
+--------
+
+Independent - Os testes unitario devem ser independentes um dos outros;
+
+--------
+
+Repeatable - Os testes unitarios devem ser repetiveis, em outros hardwares, outros sistemas, e semprem devolverem o mesmo resultado
+
+--------
+
+Self-validating - Os testes unitarios devem se auto validarem, sem interferencia humana no processo, o teste sempre devolvera um resultado positivo ou negativo
+
+--------
+
+Thorough & Timely - Os testes devem cobrir caso externos, sendo parametros invalidos ou validos, valores minimos e maximos, testando todas as situações
+
+--------
+
+ISOLAMENTO:
+
+1. INJEÇÃO DE DEPENDENCIAS
+
+Caso um objeto A dependa de outros dois objetos B e C (Equivalente a um relacionamento entre classes pai e filho), para realizar o teste unitario do metódo dependente desses objetos, é necessario realizar uma inversão, onde ao inves de A instaciar B e C, B e C serão injetados em A, realizando assim um MOCK.
+
+Exemplo:
+
+public void checkout(Cart cart){
+ PayoutProcessor payoutProcessor = new PayoutProcessor();
+ payoutProcessor.proccessPayment(cart);
+}
+
+O metodo checkout, depende de instaciar o objeto PayoutProcessor, vindo de outra classe. Sendo assim, é preciso isola-lo para realizar os testes.
+
+PayoutProcessor payoutProcessor;
+
+public CartCheckout (PayoutProcessor payoutProcessor){
+ this.payoutProcessor = payoutProcessor;
+}
+
+Agora o metodo checkout, não mais instacia PayoutProcessor, mas sim o recebe como parametro, possibilitando que ele seja injetado de forma artificial dentro do mesmo.
+
+--------
+
+PIRAMIDe DE TESTES:
+
+Meio - Integration tests - É feito o teste de conexões externas como requisições HTTP e acessos ao banco, porém sem mock (fake object). 
+
+Base - Unit tests - Teste de metodos dentro do codigo de forma isolada, com injeção de dependencias e mocks
+
+Ponta - End-to-End Testing - Testes mais focados em UI (interfaces de usuario)
+
+---------
+
+JUnit Platform - Plataforma principal do framework para testes no java virtual machine, usado de base para as novas ferramentas de teste.
+
+JUnit Jupiter - API do JUnit usada para realizar os teste
+
+JUnit Vintage - Engine de testes de backward compatibility (versões anteriores) é usado para retorcompatibilidade de testes, possibilitando mesclar testes de diferentes versões do JUnit
+
+Todos juntos fazem parte do JUnit 5.
+
+
+ 

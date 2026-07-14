@@ -1,0 +1,161 @@
+GLOSSARIO:
+
+1. API REST (TYPESCRIPT):
+
+1.1 - middleware - Um middleware é uma função que intercepta requisições HTTP em uma API REST, podendo modificar a requisição, a resposta ou encerrar o ciclo antes de chegar ao controller. Em TypeScript com Express, recebe req, res e next. Exemplo: um middleware de autenticação que verifica um token JWT e, se inválido, retorna status 401; caso contrário, chama next() para prosseguir à rota.
+
+----
+
+1.2 - interfaces - Em TypeScript, interfaces são estruturas que definem a forma de objetos, especificando nomes e tipos de propriedades e métodos, sem implementar lógica. Em APIs REST, são usadas para tipar corpos de requisição, respostas ou contratos de serviços, garantindo consistência nos dados trafegados. Exemplo: interface Produto { id: number; nome: string; preco: number; } e depois const item: Produto = { id: 10, nome: "Teclado", preco: 150.0 };.
+
+----
+
+1.3 - controllers - Controllers são funções ou classes responsáveis por receber as requisições processadas pelas rotas, executar a lógica de negócio e enviar uma resposta ao cliente. Em uma API REST com TypeScript, um controller tipicamente recebe req e res e pode chamar serviços. Exemplo: export const getUsuarios = async (req: Request, res: Response) => { const usuarios = await usuarioService.listar(); res.json(usuarios); };
+
+----
+
+1.4 - extends - Em TypeScript, extends é usado para herança de classes ou para estender interfaces/types, criando uma nova estrutura que herda membros da original. Em APIs REST, é útil para compor DTOs ou tipagens. Exemplo: interface Admin extends Usuario { nivel: number; } faz com que Admin tenha id, nome, email e também nivel.
+
+----
+
+1.5 - Requisição → [Middleware] → [Controller] → [Service] → (Banco/IA)
+	                   ↓ (se erro)            ↑ resposta
+        	      Resposta 401/403 
+----
+
+2. INDEX.TS:
+
+2.1 - index.ts - Em uma API REST com TypeScript, o arquivo index.ts centraliza e reexporta recursos de um diretório, atuando como ponto único de entrada — uma analogia a "zipar" tudo em um só lugar. Ele agrupa rotas, middlewares, controladores ou serviços, facilitando a importação e organização modular. Exemplo: em routes/index.ts, você pode ter export { usuarioRouter } from './usuario.routes'; export { produtoRouter } from './produto.routes';, e no app.ts importar apenas import routes from './routes';.
+
+----
+
+3.TSCONGIG.JSON (CompilerOptions):
+
+3.1 - target: "ES2020" → para qual versão do JavaScript o TypeScript vai compilar. ES2020 é moderna o suficiente e tem suporte a async/await e outros recursos que vamos usar.
+
+----
+
+3.2 - module: "commonjs" → o sistema de módulos que o Node.js usa (require/module.exports). É o padrão para Node.
+
+----
+
+3.3 - outDir: "./dist" → pasta onde os arquivos JavaScript compilados vão ser salvos.
+
+----
+
+3.4 - rootDir: "./src" → pasta onde está o código fonte TypeScript. O compilador vai procurar seus arquivos .ts aqui.
+
+----
+
+3.5 - strict: true → ativa todas as verificações rigorosas de tipo do TypeScript. É ótimo para evitar bugs.
+
+----
+
+3.6 - esModuleInterop: true → permite importar módulos CommonJS (como o Express) usando import express from 'express' ao invés de const express = require('express'). Deixa o código mais limpo.
+
+----
+
+3.7 - skipLibCheck: true → ignora a verificação de tipos nas bibliotecas de terceiros (acelera a compilação).
+
+----
+
+3.8 - forceConsistentCasingInFileNames: true → garante que o nome dos arquivos seja tratado com distinção entre maiúsculas/minúsculas (evita bugs em sistemas Linux).
+
+----
+
+3.9.FORA DO COMPILER OPTIONS:
+
+3.9.1 - include: ["src/**/*"] → diz ao TypeScript: "pegue todos os arquivos dentro da pasta src e subpastas".
+
+----
+
+3.9.1 - exclude: ["node_modules", "dist"] → diz ao TypeScript: "não olhe para essas pastas".
+
+----
+
+3.10 - 
+
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+
+----
+
+4 . SERVER.TS:
+
+4.1 - import express, { Application, Request, Response } from 'express';
+Importa o Express e também os tipos Application, Request e Response do TypeScript, para termos autocompletar e segurança nos parâmetros.
+
+----
+
+4.2 - const app: Application = express();
+Cria a instância do servidor Express, tipada como Application.
+
+----
+
+4.3 - app.use(express.json());
+Um middleware nativo do Express que converte o corpo das requisições (em formato JSON) para um objeto JavaScript disponível em req.body. Sem isso, você não consegue ler dados enviados via POST ou PUT.
+
+----
+
+4.4 - app.get('/ping', (req: Request, res: Response) => { ... });
+Uma rota de teste bem simples. Quando você acessar http://localhost:3000/ping no navegador ou Insomnia, ela vai retornar um JSON com { "message": "pong" }. É a nossa "certidão de nascimento" do servidor.
+
+----
+
+4.5 - const PORT = 3000;
+Define a porta. Depois, podemos substituir por variável de ambiente (process.env.PORT), mas por enquanto, fixo em 3000.
+
+----
+
+4.6 - app.listen(PORT, () => { ... });
+Sobe o servidor na porta escolhida e exibe uma mensagem no console quando estiver pronto.
+
+----
+
+4.7 - 
+
+import express, { Application, Request, Response } from 'express';
+
+const app: Application = express();
+
+app.use(express.json());
+
+app.get('/ping', (req: Request, res: Response) => {
+  res.status(200).json({ message: 'pong' });
+})
+
+const PORT = 3000; 
+
+app.listen(PORT, () => {
+  console.log(`Servidor esta rodando em: http://localhost:${PORT}`);
+  console.log('Rota teste: http://localhost:3000/ping');
+});
+
+----
+
+5. TYPES:
+
+5.1 - types - Vamos concentrar todas as interfaces aqui para facilitar as importações.
+
+(Interfaces - 1.2)
+
+----
+
+
+
+
+
+
+
