@@ -63,5 +63,128 @@ JUnit Vintage - Engine de testes de backward compatibility (versões anteriores)
 
 Todos juntos fazem parte do JUnit 5.
 
+---------
+
+import org.junit.jupiter.api.Assertions;
+Assertions: São metodos utilizados para definir os resultados esperados pelos tests;
+
+void testSum() {
+        SimpleMath math = new SimpleMath();
+        double firstNumber = 6.2D;
+        double secondNumber = 2D;
+
+        double result = math.sum(firstNumber, secondNumber);
+        double expected = 8.2D;
+
+        Assertions.assertEquals(expected, result,
+                () -> firstNumber + "+" + secondNumber + "did not produce" + expected + "!");
+        Assertions.assertNotEquals(9.2, expected);
+        Assertions.assertNotNull(expected);
+    }
+
+NotEquals : Devolve um erro caso o valor de expected seja 9.2
+NotNull : Devolve um erro caso o valor de expected seja NULL
+Equals : Devolve um erro caso o valor de expected seja diferente de result
+
+OBS: () -> é uma Lambda Function, nesse contexto, utiizada para devolver a String contatenada apenas se a Assertion for false. 
+
+---------
+
+ANNOTATIONS "@":
+
+@Test : Indica que o método abaixo é um teste;
+
+ @Test
+    void testSum() {
+        SimpleMath math = new SimpleMath();
+        double firstNumber = 6.2D;
+        double secondNumber = 2D;
+
+        double result = math.sum(firstNumber, secondNumber);
+        double expected = 8.2D;
+
+        Assertions.assertEquals(expected, result,
+                () -> firstNumber + "+" + secondNumber + "did not produce" + expected + "!");
+        Assertions.assertNotEquals(9.2, expected);
+        Assertions.assertNotNull(expected);
+    }
+
+OBS: Inserido antes de todos os metodos de teste.
+
+---------
+import org.junit.jupiter.api.DisplayName;
+@DisplayName : Usado para renomear o teste e organizar a operação;
+
+    @Test
+    @DisplayName("testing susbstraction")
+    void testSubstraction() {
+        SimpleMath math = new SimpleMath();
+        double firstNumber = 6.2D;
+        double secondNumber = 2.0D;
+        double expected = 4.2D;
+        double result = math.substraction(firstNumber, secondNumber);
+
+        Assertions.assertEquals(expected, result,
+                () -> firstNumber + "-" + secondNumber + "did not produce" + expected + "!");
+        Assertions.assertNotEquals(7.2D, expected);
+        Assertions.assertNotNull(expected);
+    }
+
+---------
+
+import org.junit.jupiter.api.BeforeAll;
+@BeforeAll : Usado para executar qualquer coisa antes do primeiro teste;
+
+
+    @BeforeAll
+    static void setup() {
+    }
+
+OBS: 
+1. Deve ser colocado antes de qualquer metodo dentro da classe de teste
+2. Sempre iniciado com o metodo setup()
+3. Sempre deve ser Static
+
+---------
+import org.junit.jupiter.api.AfterAll;
+@AfterAll : Usado para executar qualquer coisa depois de todos os testes serem executado;
+
+@AfterAll
+    static void cleanup() {
+
+    }
+
+OBS:
+1. Deve ser colocado depois de todos metodos de teste
+2. Sempre inicado com o metodo cleanup()
+3. Sempre deve ser Static
+
+---------
+
+import org.junit.jupiter.api.BeforeEach;
+@BeforeEach : Usado para executar qualquer coisa antes de cada operação;
+
+@BeforeEach
+    void beforeEach(){
+    }
+
+OBS:
+1. Não pode ser Static
+
+------------
+
+import org.junit.jupiter.api.AfterEach;
+@AfterEach : Usado para executar qualquer coisa depois de cada operação;
+
+@AfterEach
+    void afterEach() {
+        
+    }
+
+OBS:
+1. Não pode ser Static
+
+------------
+
 
  
