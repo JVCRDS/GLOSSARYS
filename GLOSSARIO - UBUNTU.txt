@@ -1,0 +1,37 @@
+find ~/.vscode/extensions/vscjava.vscode-maven-* -name "mvnw" -exec sed -i 's/\r$//' {} \; -exec chmod +x {} \;
+chmod +x ~/.vscode/extensions/vscjava.vscode-maven-0.45.3/resources/maven-wrapper/mvnw
+
+//* Fazer o wrapper do maven do vscode funcionar no ubuntu *//
+
+Atalhos;
+
+Crtl + Alt + D = terminal
+
+Window + D = Area de trabalho
+
+Comandos terminal:
+
+whoami - usuário loggado;
+~ - diretório padrão;
+$ - modo user;
+ls - lista o tudo que esta dentro do diretório atual;
+ls -l - estrutura de permissões;
+ls -A - arquivos ocultos;
+clear - limpa terminal;
+cd - vai para o diretório especificado;
+(cd ~) OR (cd ..) - volta o diretório anterior;
+mkdir {$NOME_PASTA} - cria uma pasta (OBS: cada espaço no nome irá criar uma pasta diferente);
+rmdir {$NOME_PASTA} - deleta pastas (OBS: se as pastas não estiverem vazias não serão deletadas);
+touch {$NOME_ARQUIVO} - cria um arquivo na pasta;
+cat {$NOME_ARQUIVO} - informa o que esta escrito dentro do arquivo;
+rm -r '{$NOME_PASTA}' - deleta pastas que possuem conteudo dentro e consequentemente esse conteudo;
+sudo - utiliza permissões de root;
+sudo apt update - verifica as atualzações dos pacotes presentes no sistema;
+apt list --upgradable - visualiza especificamente os pacotes que possuem atualizações dentro do sistema;
+Shift + Crtl + C/Shift + Crtl + V - copia e cola do terminal;
+man apt - manual;
+apt --help - comandos mais utilizados;
+
+
+
+
