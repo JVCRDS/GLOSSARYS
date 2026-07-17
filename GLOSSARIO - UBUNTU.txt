@@ -31,7 +31,8 @@ apt list --upgradable - visualiza especificamente os pacotes que possuem atualiz
 Shift + Crtl + C/Shift + Crtl + V - copia e cola do terminal;
 man apt - manual;
 apt --help - comandos mais utilizados;
-
+remove - remove pacotes;
+reinstall - reinstala pacotes;
 
 
 
