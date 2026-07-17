@@ -33,6 +33,6 @@ man apt - manual;
 apt --help - comandos mais utilizados;
 remove - remove pacotes;
 reinstall - reinstala pacotes;
-
+search - acha pacotes baseado no nome;
 
 
