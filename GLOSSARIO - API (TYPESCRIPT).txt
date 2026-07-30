@@ -23,6 +23,49 @@ GLOSSARIO:
         	      Resposta 401/403 
 ----
 
+1.6 - services - Services são onde as regras de negocio estão definidas. Exemplo: 
+
+
+class EmpresaService {
+  private empresas: Empresa[] = [];
+
+  salvar(empresa: Empresa): void {
+    if (!empresa.nome.trim()) {
+      throw new Error("O nome da empresa é obrigatório.");
+    }
+
+    if (!empresa.cnpj.trim()) {
+      throw new Error("O CNPJ é obrigatório.");
+    }
+
+    const existente = this.empresas.find(e => e.id === empresa.id);
+
+    if (existente) {
+      existente.nome = empresa.nome;
+      existente.cnpj = empresa.cnpj;
+      console.log("Empresa atualizada com sucesso.");
+    } else {
+      this.empresas.push(empresa);
+      console.log("Empresa cadastrada com sucesso.");
+    }
+  }
+
+  excluir(id: number): void {
+    const indice = this.empresas.findIndex(e => e.id === id);
+
+    if (indice === -1) {
+      throw new Error("Empresa não encontrada.");
+    }
+
+    this.empresas.splice(indice, 1);
+    console.log("Empresa excluída com sucesso.");
+  }
+
+  listar(): Empresa[] {
+    return this.empresas;
+  }
+}
+
 2. INDEX.TS:
 
 2.1 - index.ts - Em uma API REST com TypeScript, o arquivo index.ts centraliza e reexporta recursos de um diretório, atuando como ponto único de entrada — uma analogia a "zipar" tudo em um só lugar. Ele agrupa rotas, middlewares, controladores ou serviços, facilitando a importação e organização modular. Exemplo: em routes/index.ts, você pode ter export { usuarioRouter } from './usuario.routes'; export { produtoRouter } from './produto.routes';, e no app.ts importar apenas import routes from './routes';.
