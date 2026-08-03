@@ -1,0 +1,4 @@
+Scopes no java:
+
+1.1 - Request : Faz com que o metodo so seja executado quando feita uma request
+1.2 - View: O metodo é executado quando a pagina é carregada/recarregada
