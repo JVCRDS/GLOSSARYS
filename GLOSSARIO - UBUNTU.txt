@@ -34,5 +34,13 @@ apt --help - comandos mais utilizados;
 remove - remove pacotes;
 reinstall - reinstala pacotes;
 search - acha pacotes baseado no nome;
+tail - vizualizar as ultimas linhas de uma arquivo de texto
+tail -($QUANTIDADE_LINHAS) - pode ser usado dessa forma para mostrar uma quantidade especifica (ex: tail -20)
+| grep - usado para fazer um filtro em um arquivo de texto (obs: deve ser usando com pipe) (ex: tail -20 syslog | grep failed , mostra as ultimas 20 linhas do arquivo de log do sistema que falharam.
+journalctl - mostra os logs do sistema
+journalctl -f - mostra os logs do sistema em tempo real
+cat - mostra o conteudo de um arquivo de texto sem abrir o editor (ex:cat /etc/hostname)
+
+
 
 
