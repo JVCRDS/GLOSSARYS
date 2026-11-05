@@ -1,0 +1,14 @@
+DevOps - Conjunto de praticas/ferramentas/estrategias para otimizar/automatizar toda a entrega de um projeto de software. Tem como principio a comunicação entre todas as equipes de diferentes setores atuando em conjunto.
+
+SRE - Uma criação da google baseada no conceito de DevOps, onde apenas um profissional (Engenheiro de Software) fica encarregado de realizar a escalabilidade e gerenciamento do sistema de forma autonoma a utilizar diversas ferramentas para automação, substituindo equipes manuais de infraestrutura.
+
+
+Pipeline/CI – Integração Contínua, consiste no modelo de desenvolvimento onde os desenvolvedores realizam commits de forma constante, com pequenas alterações.
+O sistema realiza compilações (build) e roda testes automatizados (unitários/integração) a cada mudança, visando encontrar erros ou bugs de forma rápida 
+e gerar um artefato pronto (um pacote, imagem Docker, zip, etc.).
+
+CD – Entrega Contínua, Ocorre após a CI. Representa o modelo utilizado para pegar o artefato que já foi buildado e testado na etapa de CI e disponibilizá-lo de forma automática para os ambientes (Teste, Homologação ou Produção). 
+O papel do CD, por meio de CLI ou ferramentas de automação, é puramente fazer o deploy (instalação e configuração) 
+desse pacote pronto no servidor de destino e, opcionalmente, rodar testes de fumaça (smoke tests) ou integrados para garantir que o ambiente subiu bem.
+
+(OBS): Na pratica do dia-dia ambos vão ocorrer de forma conjunta, no caso primeiro o CI é feito, logo depois o CD, ja subindo o artefato para o servidor de aplicação.
